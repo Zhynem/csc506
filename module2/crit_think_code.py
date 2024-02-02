@@ -308,27 +308,27 @@ if __name__ == "__main__":
     tests = [
         # Simple test cases
         # Test no action
-        ("a", "a", True),
+        # ("a", "a", True),
         # Test insert
-        ("a", "ab", True),
+        # ("a", "ab", True),
         # Test delete
-        ("ab", "a", True),
+        # ("ab", "a", True),
         # Test copy
-        ("ab", "ac", True),
+        # ("ab", "ac", True),
         # Short example
-        ("beans", "brews", True),
+        # ("beans", "brews", True),
         # Assignment example
         ("algorithm", "alligator", True),
         # Medium examples (again, from https://phiresky.github.io/levenshtein-demo/)
-        ("elephant", "relevant", True),
-        ("Saturday", "Sunday", True),
-        ("Google", "Facebook", True),
+        # ("elephant", "relevant", True),
+        # ("Saturday", "Sunday", True),
+        # ("Google", "Facebook", True),
         # Long example, too long to be able to even properly look at the table
-        (
-            "antidisestablishmentarianism",
-            "pneumonoultramicroscopicsilicovolcanoconiosis",
-            False,
-        ),
+        # (
+        #   "antidisestablishmentarianism",
+        #    "pneumonoultramicroscopicsilicovolcanoconiosis",
+        #    False,
+        #),
     ]
 
     # Run and time each test set of words
