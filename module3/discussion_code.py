@@ -59,7 +59,8 @@ def insertion_quicksort(
         return
 
     # Find the partition point / pivot point
-    p = lomuto_partition(input_list, low_index, high_index)
+    # p = lomuto_partition(input_list, low_index, high_index)
+    p = median_of_three(input_list, low_index, high_index)
 
     # Then sort both sides by recursively calling it again on each side
     insertion_quicksort(input_list, partition_limit, low_index, p - 1)
@@ -93,6 +94,43 @@ def lomuto_partition(input_list: List[int], low_index: int, high_index: int) -> 
     return i
 
 
+def median_of_three(input_list: List[int], low_index: int, high_index: int) -> int:
+    mid_index = (low_index + high_index) // 2
+    # Sort low, mid, high
+    if input_list[high_index] < input_list[low_index]:
+        input_list[low_index], input_list[high_index] = (
+            input_list[high_index],
+            input_list[low_index],
+        )
+    if input_list[mid_index] < input_list[low_index]:
+        input_list[mid_index], input_list[low_index] = (
+            input_list[low_index],
+            input_list[mid_index],
+        )
+    if input_list[high_index] < input_list[mid_index]:
+        input_list[high_index], input_list[mid_index] = (
+            input_list[mid_index],
+            input_list[high_index],
+        )
+    # Place median at the end as pivot
+    input_list[mid_index], input_list[high_index] = (
+        input_list[high_index],
+        input_list[mid_index],
+    )
+    pivot = input_list[high_index]
+
+    i = low_index - 1
+    for j in range(low_index, high_index):
+        if input_list[j] <= pivot:
+            i += 1
+            input_list[i], input_list[j] = input_list[j], input_list[i]
+    input_list[i + 1], input_list[high_index] = (
+        input_list[high_index],
+        input_list[i + 1],
+    )
+    return i + 1
+
+
 def quicksort_only(input_list: List[int], low_index: int, high_index: int):
     global qs_recursion_count
     qs_recursion_count += 1
@@ -101,7 +139,8 @@ def quicksort_only(input_list: List[int], low_index: int, high_index: int):
     if low_index >= high_index or low_index < 0:
         return
     # Find the partition point / pivot point
-    p = lomuto_partition(input_list, low_index, high_index)
+    # p = lomuto_partition(input_list, low_index, high_index)
+    p = median_of_three(input_list, low_index, high_index)
 
     # Then sort both sides by recursively calling it again on each side
     quicksort_only(input_list, low_index, p - 1)
@@ -149,8 +188,10 @@ def run_test(list_size: int, partition_size: int, print_lists: bool = False) -> 
 # Code to handle generating lists and running tests
 if __name__ == "__main__":
     # Create a grid of list length and partition limit to compare results
-    test_list_sizes = [64, 128, 1024, 4096, 8192, 16384, 65536, 131072]
-    test_partition_limit_sizes = [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+    # test_list_sizes = [64, 128, 1024, 4096, 8192, 16384, 65536, 131072]
+    # test_partition_limit_sizes = [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+    test_list_sizes = [10_000_000]
+    test_partition_limit_sizes = [64, 256, 1024]
 
     insertion_quick_results = {}
     quick_only_results = {}
@@ -171,11 +212,13 @@ if __name__ == "__main__":
     # run_test(100_000, 0) # Takes 0.218 seconds to run quicksort on list of 100k numbers
 
     # Verify the insertion quicksort has a lower recursion / function call amount as expected
-    run_test(100_000, 0)
-    run_test(100_000, 256)
-    print(f"InsQuick  max recursion depth: {isq_recursion_count}")
-    print(f"Quicksort max recursion depth: {qs_recursion_count}")
-    print()
+    # run_test(100_000, 0)
+    # run_test(100_000, 256)
+    # print(f"InsQuick  max recursion depth: {isq_recursion_count}")
+    # print(f"Quicksort max recursion depth: {qs_recursion_count}")
+    # print()
+
+    num_tests = 1
 
     # Run the full range of tests
     for list_size in test_list_sizes:
@@ -183,10 +226,10 @@ if __name__ == "__main__":
         insertion_quick_results[list_size] = {}
         for partition_size in test_partition_limit_sizes:
             insertion_quick_results[list_size][partition_size] = timeit.timeit(
-                lambda: run_test(list_size, partition_size, False), number=1
+                lambda: run_test(list_size, partition_size, False), number=num_tests
             )
         quick_only_results[list_size] = timeit.timeit(
-            lambda: run_test(list_size, 0, False), number=1
+            lambda: run_test(list_size, 0, False), number=num_tests
         )
     print()
     print("Insertion + Quicksort Results: ")
