@@ -1,6 +1,7 @@
-# CSC506 - Design and Analysis of Algorithms
+# CSC 506 - Design and Analysis of Algorithms
+# Module 3 - Discussion
 # Michael Luker
-# Discussion 3
+# Feb 4, 2024
 
 # Prompt: One way to improve the quick sort is to use an insertion sort on lists that have a small
 # length ("partition limit"). Why does this make sense? Re-implement the quick sort and use it to

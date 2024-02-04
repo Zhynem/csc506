@@ -1,4 +1,5 @@
 # CSC 506 - Design and Analysis of Algorithms
+# Module 3 - Critical Thinking - Option 2
 # Michael Luker
 # Feb 4, 2024
 """
