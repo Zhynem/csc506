@@ -419,7 +419,8 @@ class AVLTree:
         # plt.show()
         self.count += 1
         plt.title(title)
-        plt.savefig(f"gif/tree{self.count:03d}.png")
+        # plt.savefig(f"gif/tree{self.count:03d}.png")
+        plt.savefig(f"build_tree.png")
         plt.clf()
 
     def _add_graph_node(self, graph: nx.Graph, node: Node) -> None:
@@ -433,8 +434,9 @@ class AVLTree:
 
 
 # This all seemed to work :D
-# avl = AVLTree([72, 70, 79, 12, 52, 80, 75, 55, 88, 83, 31, 37, 73, 54, 38])
-# avl.print_tree()
+avl = AVLTree([72, 70, 79, 12, 52, 80, 75, 55, 88, 83, 31, 37, 73, 54, 38])
+avl.print_tree()
+exit()
 # # Test delete an upper branch with two children
 # avl.delete(79)
 # avl.print_tree()
@@ -450,6 +452,7 @@ class AVLTree:
 # # Delete the root
 # avl.delete(70)
 # avl.print_tree()
+
 
 # Let's make a gif for funsies
 nums = list(set([random.randint(0, 100) for _ in range(20)]))
