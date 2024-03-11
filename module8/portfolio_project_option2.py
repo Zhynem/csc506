@@ -721,22 +721,6 @@ def verify_fully_retroactive_avl():
 
 
 if __name__ == "__main__":
-    temp = AVLTree()
-    temp.insert(TreeNode(30))
-    temp.insert(TreeNode(19))
-    temp.insert(TreeNode(66))
-    temp.insert(TreeNode(20))
-    temp.insert(TreeNode(2))
-    temp.insert(TreeNode(13))
-    temp.insert(TreeNode(33))
-    temp.insert(TreeNode(77))
-    temp.insert(TreeNode(4))
-    temp.insert(TreeNode(68))
-    temp.insert(TreeNode(90))
-    temp.print_tree()
-    temp.print_balances()
-    exit(0)
-
     # Verify the datastructures each behave as expected
     # verify_avltree()
     # verify_partial_retroactive_avl()
